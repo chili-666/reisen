@@ -1,6 +1,6 @@
 # reisen
 
-Ein kleines Nebenprojekt:
+Ein kleines Nebenprojekt:\n\
 
 OnlineShop für Reisen, gebaut nach Vorgaben des "Kunden"
 
