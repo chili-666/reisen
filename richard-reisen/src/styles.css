@@ -1,0 +1,89 @@
+
+
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.home .hero-body {
+  background-image: url("https://picsum.photos/1280/960");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.textshadow {
+  text-shadow: 0px 0px 3px black;
+}
+
+.card {
+  height:100%;
+}
+
+.tripCard {
+    color:black;
+    background-color:white;
+}
+
+.trip .card-image .image img{
+  height:200px !important;
+  width:100%;
+  overflow: hidden;
+}
+
+.rounded {
+    border-radius:5px;
+}
+
+.is-padded-10 {
+    padding:10px;
+}
+
+.carousel .slide .legend {
+    background-color:white !important;
+    color:black !important;
+    bottom: 15% !important;
+    left: 75% !important;
+    margin-left: -75%;
+    font-size:3em !important;
+    box-shadow: 2px 2px 15px black;
+
+}
+
+.carouselHeight img {
+ 
+    object-fit:cover;
+    width:100%!important;
+    height:50vh !important;
+}
+
+.shadow {
+    box-shadow:2px 2px 10px lightgrey;
+}
+
+.is-size-8 {
+    font-size:0.6rem;
+}
+
+.it-list li {
+    list-style-type:square;
+}
+
+.bordered {
+    border: 2px solid #27b233;
+}
+.needs-margin-bottom {
+    margin-bottom:10px;
+}
+
+.is-left {
+   
+    right: auto;
+    left: 0;
+    border-left: none;
+    border-right: 0.1rem solid #dbdbdb;
+}
+
+.is-bottom {
+     top: auto;
+    bottom: 0.5em;
+}
