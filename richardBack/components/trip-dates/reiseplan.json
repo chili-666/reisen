@@ -1,0 +1,14 @@
+{
+  "info": {
+    "name": "reiseplan",
+    "icon": "archway"
+  },
+  "options": {},
+  "attributes": {
+    "plantitel": {
+      "type": "string"
+    }
+  },
+  "connection": "default",
+  "collectionName": "components_trip_dates_reiseplans"
+}

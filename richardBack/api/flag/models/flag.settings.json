@@ -1,0 +1,20 @@
+{
+  "connection": "default",
+  "collectionName": "flags",
+  "info": {
+    "name": "Flag"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "flagName": {
+      "type": "string"
+    },
+    "trips": {
+      "via": "flags",
+      "collection": "trip"
+    }
+  }
+}
