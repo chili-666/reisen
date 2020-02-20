@@ -1,0 +1,17 @@
+{
+  "info": {
+    "name": "trip_dates",
+    "icon": "calendar-alt"
+  },
+  "options": {},
+  "attributes": {
+    "departure": {
+      "type": "date"
+    },
+    "return": {
+      "type": "date"
+    }
+  },
+  "connection": "default",
+  "collectionName": "components_trip_dates_trip_dates"
+}

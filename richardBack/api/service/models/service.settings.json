@@ -1,0 +1,20 @@
+{
+  "connection": "default",
+  "collectionName": "services",
+  "info": {
+    "name": "Service"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "serviceName": {
+      "type": "string"
+    },
+    "trip": {
+      "via": "services",
+      "model": "trip"
+    }
+  }
+}
