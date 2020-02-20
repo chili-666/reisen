@@ -1,12 +1,12 @@
 # reisen
 
-Ein kleines Nebenprojekt:
+Mein derzeitiges Haupt-Feierabendprojekt:
 
 OnlineShop für Reisen, gebaut nach Vorgaben des "Kunden"
 
-TechStack:
+**TechStack:**
 
 * ReactJs
 * ReactRouter
-  *Strapi headless CMS als Backend
+* Strapi headless CMS als Backend
 
