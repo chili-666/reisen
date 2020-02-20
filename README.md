@@ -6,7 +6,7 @@ OnlineShop für Reisen, gebaut nach Vorgaben des "Kunden"
 
 TechStack:
 
-  *ReactJs
-  *ReactRouter
+* ReactJs
+* ReactRouter
   *Strapi headless CMS als Backend
 
