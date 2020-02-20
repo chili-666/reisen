@@ -1,7 +1,0 @@
-{
-
-  "backendURL": "http://home.luis-backt-und-kocht.de:1337",
-  "mainColor": "blue",
-
-  "myCustomConfiguration": "This configuration is accessible through strapi.config.myCustomConfiguration"
-}
