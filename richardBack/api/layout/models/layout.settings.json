@@ -11,10 +11,6 @@
   "attributes": {
     "layoutName": {
       "type": "string"
-    },
-    "page": {
-      "via": "layout",
-      "model": "page"
     }
   }
 }
