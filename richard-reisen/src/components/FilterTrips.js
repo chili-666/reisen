@@ -2,13 +2,19 @@ import React from "react";
 import { FiGrid } from "react-icons/fi";
 import { FaAngleDown } from "react-icons/fa";
 
-function FilterTrips() {
+class FilterTrips extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+  console.log("FilterProps", this.props)
   return (
     <nav className="level">
       <div className="level-left">
         <div className="level-item">
           <p className="subtitle is-5">
-            <strong>123</strong> Reisen
+            <strong>{this.props.count}</strong> Reisen
           </p>
         </div>
         <div className="level-item">
@@ -54,17 +60,18 @@ function FilterTrips() {
       </div>
 
       <div className="level-right has-text-primary">
-        <button className="level-item button is-active">Alle</button>
-        <button className="level-item button is-primary">Tagesreisen</button>
-        <button className="level-item button is-primary">
+        <button className="level-item button is-active" onClick = {() => this.props.handler(0)}>Alle</button>
+        <button className="level-item button is-primary" onClick = {() => this.props.handler(2)}>Tagesreisen</button>
+        <button className="level-item button is-primary" onClick = {() => this.props.handler(3)}>
           Wochenendausflüge
         </button>
-        <button className="level-item button is-primary">
+        <button className="level-item button is-primary" onClick = {() => this.props.handler(4)}>
           Mehrtagesreisen
         </button>
       </div>
     </nav>
   );
+}
 }
 
 export default FilterTrips;

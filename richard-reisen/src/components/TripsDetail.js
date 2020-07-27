@@ -9,22 +9,23 @@ import ItineraryCard from "./DetailCompononents/ItineraryCard"
 import {Markdown} from"react-showdown"
 import ReactMarkdown from "react-markdown"
 
-    const apiUrl= 'http://home.luis-backt-und-kocht.de:1337';
+    const apiUrl= 'https://strapi.luis-backt-und-kocht.de';
     //const apiUrl = `${process.env.REACT_APP_BACKEND_URL}`
     const strapi = new Strapi(apiUrl)
   
 class TripsDetail extends React.Component {
-        constructor() {
-            super()
+        constructor(props) {
+            super(props)
             this.state= {
             trip:[],
-            loading: true
+            loading: true,
+            trip_id: ""
             }
         }
     
-       async componentDidMount() {
+       async componentDidMount(props) {
     try{
-        const response = await strapi.request('POST', '/graphql', {
+        /*const response = await strapi.request('POST', '/graphql', {
           data: {
             query: `query { trip (id: "${this.props.match.params.tripId}") {
                 title
@@ -45,6 +46,7 @@ class TripsDetail extends React.Component {
       title
       description
       id
+      
   }
   services {
       serviceName
@@ -54,29 +56,51 @@ class TripsDetail extends React.Component {
 }}`
           }
 
-        });
+        });*/
         //console.log("responseDdtail",response.data.trip.pics[0])
+        const response = await fetch(`https://strapi.luis-backt-und-kocht.de/trips/${this.props.match.params.tripId}`)
+       .then ((response) => response.json())
+        console.log("TripDEtail", response)
         this.setState({ 
-          trip: response.data.trip,
-          loading: false})
+          trip: response,
+          loading: false,
+        trip_id: this.props.match.params.tripId})
     } catch(err) {
       console.error(err) };
     }
   
+    handleClose(event) {
+    
+      document.getElementById(event.target.id).classList.toggle("is-active")
+    }
+
     render() {
-        console.log("Bilder für Carousel", this.state.trip.pics)
+        
         var longMarkdown = this.state.trip.long_description;
-        this.state.loading ? console.log("DetailState loading") : console.log("DetailState", this.state.trip)
+       // this.state.loading ? console.log("DetailState loading") : console.log("DetailState", this.state.trip)
 
         var itinerary = this.state.loading ? null : this.state.trip.itinerary.map(day => (
-            <ItineraryCard key={day.id} title={day.title} description={day.description}/>
+            <ItineraryCard key={day.id} title={day.title} description={day.description} pics={day.itineraryPics}/>
         ))
         
         var heroPic = this.state.loading ? null : this.state.trip.pics.map(pic => (
-            console.log("TripPic", pic.url ),
+        //    console.log("TripPic", pic.url, ),
             pic.url
             ));
-        console.log("HEroPic", heroPic)    
+        var tripPic = this.state.loading ? null : this.state.trip.pics.map(pic => (
+        //  console.log("TripPic", pic.url ),
+          <li>
+            <div class="modal is-clipped" id={pic.id}>
+                      <div class="modal-background"></div>
+                      <div class="modal-content">
+                      <img src={`${apiUrl}${pic.url}`} />
+                      </div>
+                      <button class="modal-close is-large" aria-label="close" onClick={this.handleClose} id={pic.id}></button>
+                   </div>
+                   <a href="#"><img className="" src={`${apiUrl}${pic.url}`} onClick={this.handleClose} id={pic.id} /></a> 
+            </li>
+           ));
+      //  console.log("HEroPic", heroPic)    
         var heroSlider = this.state.loading ? "Loading" : <DetailHeroCarousel images={heroPic}/>
         return ( 
             <div className="shadow">
@@ -85,11 +109,11 @@ class TripsDetail extends React.Component {
         <div className="hero-body">
         {heroSlider}
         </div>
-        <div className="container is-fluid has-background-white">
-        <div className="bordered rounded needs-margin-bottom">
+        <div className="container is-fluid" style={{paddingBottom:"2em"}}>
+        <div className="rounded needs-margin-bottom">
         <h1 className="
 
-        
+                has-text-centered 
                 is-size-1 
                 has-text-black
                
@@ -106,10 +130,20 @@ class TripsDetail extends React.Component {
         <DetailStoerer />
         <div className="columns">
             <div className="column is-two-thirds has-text-justified">
+              <div className="columns">
+                <div className="column is-three-quarters">
                 <ReactMarkdown source={ longMarkdown } escapeHtml={ false } />
                 </div>
+                <div className="column">
+                  <ul>
+                    {tripPic}
+                  </ul>
+                </div>
+                </div>
+
+                </div>
             <div className="column is-one-thirds">
-                    {this.state.loading ? null : <DetailServices services={this.state.trip.services} priceAdult={this.state.trip.priceAdult} priceRed={this.state.trip.priceReduced} all={this.state.trip}/>}
+                    {this.state.loading ? null : <DetailServices services={this.state.trip.services} priceAdult={this.state.trip.priceAdult} priceRed={this.state.trip.priceReduced} all={this.state.trip} tripId={this.state.trip_id}/>}
             </div>
         </div>
         <div  className="section"><h1 className="is-size-3">Ihr Reiseablauf</h1></div>

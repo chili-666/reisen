@@ -1,14 +1,15 @@
 import React from "react"
-import { FaBusAlt, FaBed, FaStar } from "react-icons/fa";
+import { FaBusAlt, FaBed, FaStar, FaAppleAlt, FaWineBottle, FaBus, FaTicketAlt, FaSkiing } from "react-icons/fa";
 //import { checkServerIdentity } from "tls";
 import {GiBus, GiPayMoney, GiKnifeFork, GiConsoleController} from "react-icons/gi"
 import { FaAngleDown, FaLuggageCart } from "react-icons/fa";
 import DetailPrice from "./DetailPrice";
 import {Link} from "react-router-dom";
+import {setCart, getCart } from "../utils";
 
 class DetailServices extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             loading: true,
             services: [], 
@@ -17,19 +18,24 @@ class DetailServices extends React.Component {
             tripPrice: 0, 
             tripDate:0,
             trip: [],
-            showPrice: false
+            showPrice: false,
+            tripId: 0
         }
         this.handleChange = this.handleChange.bind(this)
+       this.componentWillMount = this.componentWillMount.bind(this);
         //this.showPrice = this.showPrice.bind(this)
     }
 
-    componentDidMount(props) {
-        console.log("DetailServices Mounted", this.props.priceRed)
-        this.setState({
+    async componentWillMount(props) {
+        let tripId = this.props.tripId
+        console.log("DetailServices Mounted", this.props.priceRed, tripId)
+       await this.setState({
             loading:false,
             services: this.props.services,
-            trip: this.props.all
+            trip: this.props.all,
+            tripId: this.props.tripId
         })
+       
    
     }
 
@@ -40,40 +46,52 @@ class DetailServices extends React.Component {
             [name]: value,
            showPrice: true
          })
-         console.log("Changed State!", this.state)
+        
       }
 
-  
+      checkSetCart() {
+          const passengers = this.state.adults + this.state.kids
+          if (passengers > 0) {
+            setCart(this.state)
+          }
+      }
+
+     
 
    render() {
-       console.log("ServicesProps", this.props)
-       //Services und Icons erstellen
-   var icon
-    var serviceICON = this.state.services.map(service => {
-        console.log("ServiceID", service.serviceName)
-        switch(service.id) {
-            case "1": 
-                icon = <tr><td><GiKnifeFork /></td><td>  {service.serviceName}</td></tr>   ;
-                break;
-                case "2": 
-                icon = <tr><td><FaBusAlt /></td><td>Busanreise</td></tr>;
-                break;
-             case "3": 
-            icon = <tr><td><GiBus /> </td><td> {service.serviceName}</td></tr>  ;
-            break;
-            case "4": 
-            icon = <tr><td> <FaBed /> </td><td> {service.serviceName}</td></tr>  ;
-            break;
-            case "5": 
-            icon = <tr><td><FaStar />  </td><td> {service.serviceName}</td></tr>  ;
-            break;
-            case "6": 
-            icon = <tr><td><GiPayMoney />  </td><td> {service.serviceName}</td></tr>  ;
-            break;
-            
-        }
-        return icon;
-    });
+       console.log("ServicesProps", this.state.services)
+      
+         //Services und Icons erstellen
+         var serviceICON = this.state.services.map(service => {
+            let icon
+            switch (service.Icon) {
+                case "FaBed":
+                    icon = <FaBed />
+                    break;
+                case "FaWineBottle":
+                    icon = <FaWineBottle />
+                    break;
+                case "FaWineBottle":
+                    icon = <FaWineBottle />
+                    break;
+                case "FaBus":
+                    icon = <FaBus />
+                    break;
+                    case "FaTicketAlt":
+                        icon = <FaTicketAlt />
+                    break;
+                    case "FaSkiing":
+                        icon = <FaSkiing />
+                    break;
+                    case "FaAppleAlt":
+                        icon = <FaAppleAlt />
+                    break;
+                    case "GiKnifeFork":
+                        icon = <GiKnifeFork />
+                    break;
+            }
+            return <tr key={service.id}><td>{icon}</td><td>{service.serviceName}</td></tr>  
+        });
         
 
 
@@ -110,8 +128,9 @@ class DetailServices extends React.Component {
   returnTag = returnDatum.getDate(),
            <option value={dateKey}>{abfahrtTag}.{abfahrtMonat}.{abfahrtJahr} - {returnTag}.{returnMonat}.{returnJahr}</option>
     ))
-            
+    console.log("TripDetail", this.state)      
     return (
+        
         <div>
         <div className="box">
         <div>Diese Reise buchen</div>
@@ -194,7 +213,7 @@ class DetailServices extends React.Component {
             id="incart" 
             disabled={disabled}>
        
-        <span>in den Einkaufswagen</span>
+        <span onClick={this.checkSetCart()}>in den Einkaufswagen</span>
         </Link>
           </div>
           </div>

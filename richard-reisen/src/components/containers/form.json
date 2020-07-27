@@ -1,0 +1,32 @@
+{
+    "views": {    
+      "login": [
+        {
+          "customBootstrapClass": "col-md-12",
+          "label": "Username",
+          "name": "identifier",
+          "type": "text",
+          "placeholder": "johndoe@gmail.com"
+        },
+        {
+          "customBootstrapClass": "col-md-12",
+          "label": "Password",
+          "name": "password",
+          "type": "password"
+        },
+        {
+          "customBootstrapClass": "col-md-6",
+          "label": "Remember me",
+          "name": "rememberMe",
+          "type": "checkbox"
+        }
+      ]
+    },
+    "data": {
+      "login": {
+        "identifier": "",
+        "password": "",
+        "rememberMe": false
+      }
+    }
+  }

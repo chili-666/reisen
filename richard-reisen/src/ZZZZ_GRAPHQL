@@ -1,0 +1,25 @@
+Create Booking
+
+mutation {
+  createBooking(input: {data: {booking_id:14, user:3, trip:3, travellers:{traveller_Name:"sepp", traveller_Age:"42"}}}) {
+    booking {
+      booking_id
+      user {id
+      username}
+      trip {id}
+      travellers{traveller_Name}
+    }}
+  }
+  
+
+  List all bookings:
+
+  query {
+ bookings {
+  booking_id
+	user {id}
+  trip {id}
+}
+  
+
+}

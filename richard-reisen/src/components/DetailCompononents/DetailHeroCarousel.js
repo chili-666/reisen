@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-const apiUrl= 'http://home.luis-backt-und-kocht.de:1337';
+const apiUrl= 'https://strapi.luis-backt-und-kocht.de';
 
 class DetailHeroCarousel extends React.Component{
     state = {
